@@ -45,6 +45,7 @@ export default {
       setLocalStorageAuthData(response.data);
       setAuthHeader();
       store.commit('auth', response.data.user);
+      store.commit('setAuthToken', response.data.access_token);
       Vue.prototype.router.push({ name: 'base' });
 
       return response;
@@ -67,6 +68,7 @@ export default {
     setLocalStorageAuthData(response.data);
     setAuthHeader();
     store.commit('auth', response.data.user);
+    store.commit('setAuthToken', response.data.access_token);
     Vue.prototype.router.push({ name: 'base' });
 
     return response;
@@ -83,10 +85,12 @@ export default {
   },
   initStoreAuth() {
     const userData = JSON.parse(localStorage.getItem('user'));
+    const authToken = localStorage.getItem('access_token');
 
     if (userData) {
       setAuthHeader();
       store.commit('auth', userData);
+      store.commit('setAuthToken', authToken);
     }
 
     return setAuthHeader(true);
