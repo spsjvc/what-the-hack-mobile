@@ -17,9 +17,10 @@
           value="true"
           :to="item.to"
         >
-          <v-list-tile-content>
+          <v-list-tile-content v-if="item.isLink">
             <v-list-tile-title v-text="item.title"/>
           </v-list-tile-content>
+          <v-btn v-if="!item.isLink" @click="item.action">{{item.title}}</v-btn>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -36,6 +37,8 @@
 </template>
 
 <script>
+import authService from '../api-services/auth.service';
+
 export default {
   name: 'Base',
   data() {
@@ -46,14 +49,23 @@ export default {
       items: [
         {
           title: 'Moj QR kod',
+          isLink: true,
           to: {
             name: 'qrview'
           }
         },
         {
           title: 'Čitaonica',
+          isLink: true,
           to: {
             name: 'roomlayout'
+          }
+        },
+        {
+          title: 'Izloguj me',
+          isLink: false,
+          action: () => {
+            authService.logout();
           }
         }
       ],

@@ -1,5 +1,6 @@
 <template>
-  <v-container fluid>
+  <v-container fluid
+    :style="{ display: 'flex', alignItems: 'center' }">
     <v-slide-y-transition mode="out-in">
       <v-layout
         column
@@ -21,13 +22,16 @@
             v-model="form.password"
             data-vv-name="password"
             name="password"
-            label="Password"
+            label="Lozinka"
             type="password"
           />
           <v-btn
             color="primary"
-            @click="submit">Login
+            @click="submit">Uloguj se
           </v-btn>
+          <br />
+          <br />
+          Nemate nalog? <router-link :to="{ name: 'register' }">Registrujte se!</router-link>
         </v-form>
       </v-layout>
     </v-slide-y-transition>

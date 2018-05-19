@@ -2,17 +2,29 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import App from './App';
+import Axios from 'axios';
 import router from './router';
 import VueCordova from 'vue-cordova';
 import Vuetify from 'vuetify';
 import VeeValidate from 'vee-validate';
 import store from './store';
 
+import { API_BASE_URL } from './constants';
+import authService from './api-services/auth.service';
+
 Vue.config.productionTip = false;
 
 Vue.use(VueCordova);
 Vue.use(Vuetify);
 Vue.use(VeeValidate);
+
+Vue.prototype.router = router;
+
+Axios.defaults.baseURL = API_BASE_URL;
+Axios.defaults.headers.Accept = 'application/json';
+Axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+
+authService.initStoreAuth();
 
 // add cordova.js only if serving the app through file://
 if (window.location.protocol === 'file:' || window.location.port === '3000') {

@@ -17,7 +17,7 @@ const mutations = {
     state.activeUser = null;
   },
   auth(state, activeUser) {
-    state.activeUser = new User(activeUser);
+    state.activeUser = activeUser;
   }
 };
 
