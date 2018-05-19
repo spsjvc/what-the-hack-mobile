@@ -1,5 +1,6 @@
 import roomService from '../../api-services/room.service';
 import websocket from '../../util/websocket';
+import * as _ from 'lodash';
 
 const state = {
   selectedRoomId: null,
@@ -8,8 +9,8 @@ const state = {
 
 const getters = {
   rooms: (state) => state.rooms,
-  layout: (state) => state.rooms.filter(room => room.id === state.selectedRoomId)[0].layout,
-  seats: (state) => state.rooms.filter(room => room.id === state.selectedRoomId)[0].seats,
+  layout: (state) => state.rooms.find(room => room.id === state.selectedRoomId).layout,
+  seats: (state) => state.rooms.find(room => room.id === state.selectedRoomId).seats,
   selectedRoomId: (state) => state.room.selectedRoomId
 };
 
@@ -23,7 +24,7 @@ const actions = {
 
     rooms.data.forEach(room => {
       websocket.subscribe(`/rooms/${room.id}`, (event) => {
-        commit('updateRoom', room.id, event.data);
+        commit('updateRoom', event.data);
       });
     });
 
@@ -44,8 +45,9 @@ const mutations = {
   setSelectedRoomId(state, selectedRoomId) {
     state.selectedRoomId = selectedRoomId;
   },
-  updateRoom(state, roomId, newRoom) {
-    state.rooms = state.rooms.filter(room => room.id !== roomId).concat[newRoom];
+  updateRoom(state, newRoom) {
+    const oldRoom = state.rooms.find(room => room.id === newRoom.id);
+    _.assign(oldRoom, newRoom);
   }
 };
 
