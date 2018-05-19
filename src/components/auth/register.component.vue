@@ -1,5 +1,6 @@
 <template>
-  <v-container fluid>
+  <v-container fluid
+    :style="{ display: 'flex', alignItems: 'center' }">
     <v-slide-y-transition mode="out-in">
       <v-layout
         column
@@ -9,16 +10,16 @@
           <v-text-field
             v-validate="'required'"
             :error-messages="errors.collect('name')"
-            v-model="name"
+            v-model="form.name"
             data-vv-name="name"
             name="name"
-            label="Name"
+            label="Ime"
             type="text"
           />
           <v-text-field
             v-validate="'required|email'"
             :error-messages="errors.collect('email')"
-            v-model="email"
+            v-model="form.email"
             data-vv-name="email"
             name="email"
             label="Email"
@@ -27,16 +28,19 @@
           <v-text-field
             v-validate="'required|min:6|max:30'"
             :error-messages="errors.collect('password')"
-            v-model="password"
+            v-model="form.password"
             data-vv-name="password"
             name="password"
-            label="Password"
+            label="Lozinka"
             type="password"
           />
           <v-btn
             color="primary"
-            @click="submit">Register
+            @click="submit">Registruj se
           </v-btn>
+          <br />
+          <br />
+          Već imate nalog? <router-link :to="{ name: 'login' }">Ulogujte se!</router-link>
         </v-form>
       </v-layout>
     </v-slide-y-transition>
@@ -50,9 +54,11 @@ export default {
   name: 'Register',
   data() {
     return {
-      email: '',
-      name: '',
-      password: ''
+      form: {
+        email: '',
+        name: '',
+        password: ''
+      }
     };
   },
   methods: {
