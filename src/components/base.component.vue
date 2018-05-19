@@ -1,0 +1,73 @@
+<template>
+  <div id="base"
+    :style="{ height: '100%' }">
+    <v-navigation-drawer
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      v-model="drawer"
+      persistent
+      enable-resize-watcher
+      fixed
+      app
+    >
+      <v-list>
+        <v-list-tile
+          v-for="(item, i) in items"
+          :key="i"
+          value="true"
+          :to="item.to"
+        >
+          <v-list-tile-content>
+            <v-list-tile-title v-text="item.title"/>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar
+      :clipped-left="clipped"
+      app
+    >
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
+      <v-toolbar-title v-text="title"/>
+      <v-spacer/>
+    </v-toolbar>
+    <router-view />
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Base',
+  data() {
+    return {
+      clipped: false,
+      drawer: false,
+      fixed: false,
+      items: [
+        {
+          title: 'Moj QR kod',
+          to: {
+            name: 'qrview'
+          }
+        },
+        {
+          title: 'Čitaonica',
+          to: {
+            name: 'roomlayout'
+          }
+        }
+      ],
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: 'Pametna čitaonica'
+    };
+  }
+};
+</script>
+
+<style lang="scss">
+#base {
+  margin-top: 60px;
+}
+</style>

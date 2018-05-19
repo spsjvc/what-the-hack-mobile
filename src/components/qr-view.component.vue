@@ -1,9 +1,13 @@
 <template>
-  <v-container fluid>
+  <v-container
+    fluid
+    :style="{ height: '100%', display: 'flex', alignItems: 'center' }">
     <v-slide-y-transition mode="out-in">
       <v-layout
+        :style="{alignItems: 'center'}"
         column
         align-center>
+        <strong>Vaš QR kod:</strong><br />
         <qr-code :text="token" />
       </v-layout>
     </v-slide-y-transition>
@@ -20,7 +24,7 @@ export default {
   },
   data() {
     return {
-      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2FwaVwvYXV0aFwvcmVnaXN0ZXIiLCJpYXQiOjE1MjY3MTUyNzIsIm5iZiI6MTUyNjcxNTI3MiwianRpIjoiOUJLSElJUzhMUVZxZnAxViIsInN1YiI6MywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.b-DPFw_xB4vIM46Bznr8PqZyFcv4Gti2fzhKwAxphhU'
+      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwcnYiOiI5ZjhhMjM4OWEyMGNhMDc1MmFhOWU5NTA5MzUxNTUxN2U5MGUxOTRjIiwidXNlciI6eyJpZCI6MX19.EnWdyS9wFY-V7ezqjITgRQpf3oEr3fKacABxNCQ7unw'
     };
   }
 };
