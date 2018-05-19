@@ -8,25 +8,33 @@
         column
         align-center>
         <strong>Vaš QR kod:</strong><br />
-        <qr-code :text="authToken" />
+        <vue-qrcode :value="authToken" :options="{ size: QRWidth }" />
       </v-layout>
     </v-slide-y-transition>
   </v-container>
 </template>
 
 <script>
-import QrCode from 'vue-qrcode-component';
+import VueQrcode from '@xkeshi/vue-qrcode'
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'QRView',
   components: {
-    QrCode
+    VueQrcode
+  },
+  data() {
+    return {
+      QRWidth: null
+    };
   },
   computed: {
     ...mapGetters([
       'authToken'
     ])
+  },
+  created() {
+    this.QRWidth = window.innerWidth * 0.8;
   }
 };
 </script>
