@@ -25,8 +25,8 @@
             type="text"
           />
           <v-text-field
-            v-validate="'required|email'"
-            :error-messages="errors.collect('email')"
+            v-validate="'required|min:6|max:30'"
+            :error-messages="errors.collect('password')"
             v-model="password"
             data-vv-name="password"
             name="password"
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import authService from '../../api-services/auth.service';
+
 export default {
   name: 'Register',
   data() {
@@ -57,7 +59,9 @@ export default {
     async submit() {
       const isValid = await this.$validator.validateAll();
 
-      console.log(isValid);
+      if (isValid) {
+        authService.register(this.form);
+      }
     }
   }
 };

@@ -9,7 +9,7 @@
           <v-text-field
             v-validate="'required|email'"
             :error-messages="errors.collect('email')"
-            v-model="email"
+            v-model="form.email"
             data-vv-name="email"
             name="email"
             label="Email"
@@ -18,7 +18,7 @@
           <v-text-field
             v-validate="'required|min:6|max:30'"
             :error-messages="errors.collect('password')"
-            v-model="password"
+            v-model="form.password"
             data-vv-name="password"
             name="password"
             label="Password"
@@ -35,19 +35,25 @@
 </template>
 
 <script>
+import authService from '../../api-services/auth.service';
+
 export default {
   name: 'Login',
   data() {
     return {
-      email: '',
-      password: ''
+      form: {
+        email: '',
+        password: ''
+      }
     };
   },
   methods: {
     async submit() {
       const isValid = await this.$validator.validateAll();
 
-      console.log(isValid);
+      if (isValid) {
+        authService.login(this.form);
+      }
     }
   }
 };
