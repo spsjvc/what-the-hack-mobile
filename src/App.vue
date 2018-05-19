@@ -49,7 +49,7 @@ export default {
       items: [
         {
           icon: 'bubble_chart',
-          title: 'Inspire'
+          title: 'QR kod'
         }
       ],
       miniVariant: false,

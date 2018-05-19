@@ -14,7 +14,7 @@
 import QrCode from 'vue-qrcode-component';
 
 export default {
-  name: 'QRPage',
+  name: 'QRView',
   components: {
     QrCode
   },

@@ -5,12 +5,14 @@ import App from './App';
 import router from './router';
 import VueCordova from 'vue-cordova';
 import Vuetify from 'vuetify';
+import VeeValidate from 'vee-validate';
 import store from './store';
 
 Vue.config.productionTip = false;
 
 Vue.use(VueCordova);
 Vue.use(Vuetify);
+Vue.use(VeeValidate);
 
 // add cordova.js only if serving the app through file://
 if (window.location.protocol === 'file:' || window.location.port === '3000') {
