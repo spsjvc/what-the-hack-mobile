@@ -8,10 +8,10 @@ import VueCordova from 'vue-cordova';
 import Vuetify from 'vuetify';
 import VeeValidate from 'vee-validate';
 import store from './store';
-import * as deepstream from 'deepstream.io-client-js';
 
 import { API_BASE_URL } from './constants';
 import authService from './api-services/auth.service';
+import websocket from './util/websocket';
 
 Vue.config.productionTip = false;
 
@@ -27,12 +27,7 @@ Axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
 
 authService.initStoreAuth();
 
-const client = deepstream('ws://wth.aleksandar-babic.com:6020');
-client.login();
-
-client.event.subscribe('/rooms/1', data => {
-  console.log(data);
-});
+websocket.initialize();
 
 // add cordova.js only if serving the app through file://
 if (window.location.protocol === 'file:' || window.location.port === '3000') {

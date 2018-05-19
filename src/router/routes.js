@@ -3,6 +3,7 @@ import Base from '@/components/base.component';
 import Login from '@/components/auth/login.component';
 import Register from '@/components/auth/register.component';
 import RoomLayout from '@/components/room-layout.component';
+import RoomsList from '@/components/rooms-list.component';
 
 export const routes = [
   {
@@ -20,6 +21,11 @@ export const routes = [
         path: '/room-layout',
         name: 'roomlayout',
         component: RoomLayout
+      },
+      {
+        path: '/rooms-list',
+        name: 'roomslist',
+        component: RoomsList
       }
     ]
   },

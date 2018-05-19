@@ -37,10 +37,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import store from 'Store';
 import authService from '../api-services/auth.service';
 
 export default {
   name: 'Base',
+  mounted() {
+    store.dispatch('fetchRooms');
+  },
   data() {
     return {
       clipped: false,
@@ -55,10 +60,10 @@ export default {
           }
         },
         {
-          title: 'Čitaonica',
+          title: 'Čitaonice',
           isLink: true,
           to: {
-            name: 'roomlayout'
+            name: 'roomslist'
           }
         },
         {

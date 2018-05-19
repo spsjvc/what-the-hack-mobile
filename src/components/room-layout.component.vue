@@ -20,14 +20,16 @@
             class="layout-seat"
             @click="seatClicked(i-1, j-1)"
           >
+            <strong class="text-xs-center" :style="{ width: '100%' }">{{i}}{{alphabet[j - 1]}}</strong>
           </div>
         </div>
       </div>
       <v-dialog v-model="dialog">
         <v-card>
-          <v-card-title>
-            Na ovom mestu je trenutno {{ tappedSeat ? tappedSeat.user.name : '' }}.
-          </v-card-title>
+          <v-card-text>
+            Ovo mesto je trenutno zauzeto.
+            <br />Ime studenta: <strong>{{ tappedSeat ? tappedSeat.user.name : '' }}</strong>
+          </v-card-text>
         </v-card>
       </v-dialog>
       <v-btn color="primary" :style="{ marginTop: '2.5%' }">REZERVIŠI MESTO</v-btn>
@@ -45,11 +47,9 @@ export default {
   data: () => ({
     choosenSeat: {},
     tappedSeat: null,
-    dialog: false
+    dialog: false,
+    alphabet: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
   }),
-  mounted() {
-    store.dispatch('fetchRoom');
-  },
   computed: {
     ...mapGetters(['seats', 'layout']),
     rowsCount() {
@@ -60,7 +60,7 @@ export default {
     },
     seatsMatrix() {
       return _.chunk(this.seats, 5)
-    }
+    },
   },
   methods: {
     selectSeat(i, j) {
@@ -112,6 +112,9 @@ export default {
   flex: 1;
   margin: 5px 5px 5px 5px;
   border-radius: 10px;
+  color: white;
+  align-items: center;
+  display: flex;
 }
 .seat-taken {
   background: #D81159;
