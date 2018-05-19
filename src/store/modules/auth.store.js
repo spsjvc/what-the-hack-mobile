@@ -8,7 +8,6 @@ const state = {
 const getters = {
   activeUser: (state) => state.activeUser,
   isLogged: (state) => !_.isEmpty(state.activeUser),
-  isAdmin: (state, getters) => getters.isLogged && state.activeUser.isAdmin(),
   activeUserRole: (state) => state.activeUser ? state.activeUser.role : 'guest',
   authToken: (state) => state.authToken
 };
