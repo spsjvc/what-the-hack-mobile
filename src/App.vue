@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
       clipped: false,
@@ -48,24 +48,24 @@ export default {
       fixed: false,
       items: [
         {
-          icon: "bubble_chart",
-          title: "Inspire"
+          icon: 'bubble_chart',
+          title: 'Inspire'
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Pametna čitaonica"
+      title: 'Pametna čitaonica'
     };
   }
 };
 </script>
 
-<style lang="scss">
-@import "/styles/app.scss";
+<style lang='scss'>
+@import '/styles/app.scss';
 
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
