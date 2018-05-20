@@ -11,7 +11,8 @@ const getters = {
   rooms: (state) => state.rooms,
   layout: (state) => state.rooms.find(room => room.id === state.selectedRoomId).layout,
   seats: (state) => state.rooms.find(room => room.id === state.selectedRoomId).seats,
-  selectedRoomId: (state) => state.room.selectedRoomId
+  selectedRoomId: (state) => state.selectedRoomId,
+  selectedRoom: (state) => state.rooms.find(room => room.id === state.selectedRoomId)
 };
 
 const actions = {

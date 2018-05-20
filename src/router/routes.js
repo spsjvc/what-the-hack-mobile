@@ -4,6 +4,7 @@ import Login from '@/components/auth/login.component';
 import Register from '@/components/auth/register.component';
 import RoomLayout from '@/components/room-layout.component';
 import RoomsList from '@/components/rooms-list.component';
+import MyReservations from '@/components/my-reservations.component';
 
 export const routes = [
   {
@@ -26,6 +27,11 @@ export const routes = [
         path: '/rooms-list',
         name: 'roomslist',
         component: RoomsList
+      },
+      {
+        path: '/my-reservations',
+        name: 'myreservations',
+        component: MyReservations
       }
     ]
   },

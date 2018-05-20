@@ -67,6 +67,13 @@ export default {
           }
         },
         {
+          title: 'Moje rezervacije',
+          isLink: true,
+          to: {
+            name: 'myreservations'
+          }
+        },
+        {
           title: 'Izloguj me',
           isLink: false,
           action: () => {

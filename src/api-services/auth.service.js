@@ -21,10 +21,7 @@ const setAuthHeader = (unset = false) => {
     return;
   }
 
-  _.assign(
-    Axios.defaults.headers,
-    { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }
-  );
+  Axios.defaults.headers.authorization = 'Bearer ' + localStorage.getItem('access_token');
 };
 
 const checkLocalStorage = () => {

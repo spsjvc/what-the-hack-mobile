@@ -6,5 +6,11 @@ export default {
   },
   getRooms() {
     return Axios.get('/rooms');
+  },
+  getAvailableSeats(data) {
+    return Axios.post('/reservations/get-available-seats', data);
+  },
+  getTakenSeats(data) {
+    return Axios.post('/reservations/get-taken-seats', data);
   }
 };
