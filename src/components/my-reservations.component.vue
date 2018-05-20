@@ -15,7 +15,7 @@
               <v-list-tile-content>
                 <v-list-tile-title>
                   Rezervacija u <strong>{{getRoomName(item.room_id)}} ({{getRoomFaculty(item.room_id)}})</strong>
-                  na mestu <strong>{{getSeatName(item.room_id)}}</strong>
+                  na mestu <strong>{{getSeatName(item)}}</strong>
                 </v-list-tile-title>
                 <v-list-tile-sub-title>
                   Od <strong>{{moment(item.time_start, 'YYYY-MM-DD HH:mm:ss').format('DD.MM.YYYY. HH:mm')}}h</strong>
@@ -42,6 +42,7 @@ export default {
   data: () => ({
     reservations: [],
     isLoadingReservations: true,
+    alphabet: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
   }),
   mounted() {
     this.fetchFutureReservations();
@@ -72,15 +73,25 @@ export default {
 
       return this.rooms.find(room => room.id === roomId).faculty;
     },
-    getSeatName(roomId) {
+    getSeatName(reservation) {
       if (this.rooms.length === 0) {
         return;
       }
 
-      const seats = this.rooms.find(room => room.id === roomId).seats;
+      const seats = this.rooms.find(room => room.id === reservation.room_id).seats;
+      const roomSeatsLayout = _.chunk(seats, 5);
 
-      console.log(seats);
-      return 'test';
+      let seatIndex = 0;
+      for (let i = 0; i < seats.length; i++) {
+        if (seats[i].id !== reservation.seat_id) {
+          seatIndex++;
+          continue;
+        }
+
+        break;
+      }
+
+      return `${Math.floor(seatIndex / 5) + 1}${this.alphabet[seatIndex % 5]}`
     }
   }
 };

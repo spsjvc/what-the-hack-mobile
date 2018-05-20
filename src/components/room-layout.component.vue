@@ -168,6 +168,8 @@ export default {
       this.timePicker = null;
       this.reservationDialog = false;
       this.createReservationStep = 1;
+      this.choosenSeat = {};
+      this.tappedSeat = null;
     },
     moment: () => {
       return moment();
@@ -188,7 +190,7 @@ export default {
       }).then(response => {
         this.reservationDialog = false;
         this.resetReservation();
-        this.successfullyCreatedDialog = true;
+        this.successfullyCreatedDialog = true;;
       })
     },
     selectSeat(i, j) {

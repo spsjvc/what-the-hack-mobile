@@ -16,6 +16,14 @@ const getters = {
 };
 
 const actions = {
+  listenToPublic({ commit }) {
+    websocket.subscribe('/public', (event) => {
+      commit('appendRoom', event.data);
+      websocket.subscribe(`/rooms/${event.data.id}`, (eventTwo) => {
+        commit('updateRoom', eventTwo.data);
+      });
+    });
+  },
   async fetchRoom({ commit }) {
     const room = await roomService.getRoom(1);
     commit('setRoom', room.data);
@@ -49,6 +57,9 @@ const mutations = {
   updateRoom(state, newRoom) {
     const oldRoom = state.rooms.find(room => room.id === newRoom.id);
     _.assign(oldRoom, newRoom);
+  },
+  appendRoom(state, newRoom) {
+    state.rooms.push(newRoom);
   }
 };
 

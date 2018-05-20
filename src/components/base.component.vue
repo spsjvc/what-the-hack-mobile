@@ -45,6 +45,7 @@ export default {
   name: 'Base',
   mounted() {
     store.dispatch('fetchRooms');
+    store.dispatch('listenToPublic');
   },
   data() {
     return {
