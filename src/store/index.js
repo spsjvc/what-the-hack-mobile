@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { auth, room } from './modules';
+import { auth, room, event } from './modules';
 
 Vue.use(Vuex);
 
 const storeData = {
   modules: {
-    auth, room
+    auth, room, event
   }
 };
 

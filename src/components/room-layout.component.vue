@@ -30,6 +30,10 @@
           <v-card-text>
             Ovo mesto je zauzeto.
             <br />Ime studenta: <strong>{{ tappedSeat ? tappedSeat.user.name : '' }}</strong>
+            <br />
+            Trenutno uči: <strong>{{tappedSeat
+              ? tappedSeat.subject ? tappedSeat.subject : 'Nema podataka'
+              : '' }}</strong>
           </v-card-text>
         </v-card>
       </v-dialog>
@@ -59,7 +63,7 @@
           <v-date-picker
             full-width
             :min="moment().subtract(1, 'days').format()"
-            :max="moment().add(2, 'days').format()"
+            :max="moment().add(activeUser.points >= 20 ? 7 : 2, 'days').format()"
             v-model="datePicker"
           />
           <v-btn :disabled="!datePicker" @click="incrementStep" color="primary" :style="{ marginTop: '10px', marginBottom: '10px' }">sledeći korak</v-btn>
@@ -68,7 +72,8 @@
           <strong>Izaberi vreme početka rezervacije: </strong>
           <v-time-picker
             format="24hr"
-
+            :min="minStartDate"
+            :max="'19:00:00'"
             v-model="startTimePicker"
             :style="{ width: '100%' }"
           />
@@ -78,7 +83,6 @@
           <strong>Izaberi vreme kraja rezervacije: </strong>
           <v-time-picker
             format="24hr"
-
             v-model="endTimePicker"
             :style="{ width: '100%' }"
           />
@@ -161,6 +165,9 @@ export default {
     seatsMatrix() {
       return _.chunk(this.seats, 5)
     },
+    minStartDate() {
+      return this.moment() < this.moment({hour: 8, minute: 0, seconds: 0}) ? this.moment({hour: 8, minute: 0, seconds: 0}).format('HH:mm:ss') : this.moment().format('HH:mm:ss')
+    }
   },
   methods: {
     resetReservation() {
@@ -170,9 +177,10 @@ export default {
       this.createReservationStep = 1;
       this.choosenSeat = {};
       this.tappedSeat = null;
+      this.subject = null;
     },
-    moment: () => {
-      return moment();
+    moment: (data) => {
+      return moment(data);
     },
     openReservationDialog() {
       this.reservationDialog = true;

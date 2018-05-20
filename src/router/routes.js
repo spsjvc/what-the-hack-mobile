@@ -5,6 +5,7 @@ import Register from '@/components/auth/register.component';
 import RoomLayout from '@/components/room-layout.component';
 import RoomsList from '@/components/rooms-list.component';
 import MyReservations from '@/components/my-reservations.component';
+import MyProfile from '@/components/my-profile.component';
 
 export const routes = [
   {
@@ -32,6 +33,11 @@ export const routes = [
         path: '/my-reservations',
         name: 'myreservations',
         component: MyReservations
+      },
+      {
+        path: '/my-profile',
+        name: 'myprofile',
+        component: MyProfile
       }
     ]
   },

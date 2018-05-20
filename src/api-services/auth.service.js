@@ -91,5 +91,8 @@ export default {
     }
 
     return setAuthHeader(true);
+  },
+  updateUserInLocalStorage(newUser) {
+    localStorage.setItem('user', JSON.stringify(newUser));
   }
 };

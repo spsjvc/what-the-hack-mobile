@@ -25,9 +25,8 @@ Axios.defaults.baseURL = API_BASE_URL;
 Axios.defaults.headers.Accept = 'application/json';
 Axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
 
-authService.initStoreAuth();
-
 websocket.initialize();
+authService.initStoreAuth();
 
 // add cordova.js only if serving the app through file://
 if (window.location.protocol === 'file:' || window.location.port === '3000') {
